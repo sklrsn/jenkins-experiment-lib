@@ -6,4 +6,6 @@ def call(Map config) {
 
     def parsedCmd = ShCommand.parseCmd(config.command)
     sh "${parsedCmd}"
+
+    throw new GroovyRuntimeException("Test")
 }
