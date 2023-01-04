@@ -1,5 +1,6 @@
 import org.sklrsn.utils.ShCommand
 
 def call(Map config) {
-    print(ShCommand.echoCmd(config.command))
+    def command = ShCommand.echoCmd(config.command)
+    sh ${command}
 }
