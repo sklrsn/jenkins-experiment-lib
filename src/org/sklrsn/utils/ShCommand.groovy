@@ -1,7 +1,7 @@
 package org.sklrsn.utils
 
 class ShCommand {
-    static String printCmd(cmd) {
+    static String echoCmd(cmd) {
         return "echo ${cmd}"
     }
 }
