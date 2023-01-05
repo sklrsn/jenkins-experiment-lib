@@ -24,26 +24,26 @@ abstract class Report {
 
     String report(String delimiter, Map params) {
         StringBuilder sb = new StringBuilder()
-
-        String status = params.status
-        String buildNumber = params.buildnumber
-        String buildUrl = params.buildurl
-
-        switch (status) {
+        switch (params.status) {
             case Status.SUCCESS:
-                sb.append("${Status.SUCCESS} [${buildNumber}]").append(delimiter).append(buildUrl)
+                sb.append("${Status.SUCCESS} [${params.buildnumber}]").append(delimiter).append(params.buildurl)
+                break
 
             case Status.FAILURE:
-                sb.append("${Status.FAILURE} [${buildNumber}]").append(delimiter).append(buildUrl)
+                sb.append("${Status.FAILURE} [${params.buildnumber}]").append(delimiter).append(params.buildurl)
+                break
 
             case Status.ABORTED:
-                sb.append("${Status.ABORTED} [${buildNumber}]").append(delimiter).append(buildUrl)
+                sb.append("${Status.ABORTED} [${params.buildnumber}]").append(delimiter).append(params.buildurl)
+                break
 
             case Status.NORMAL:
-                sb.append("${Status.NORMAL} [${buildNumber}]").append(delimiter).append(buildUrl)
+                sb.append("${Status.NORMAL} [${params.buildnumber}]").append(delimiter).append(params.buildurl)
+                break
 
             case Status.UNSTABLE:
-                sb.append("${Status.UNSTABLE} [${buildNumber}]").append(delimiter).append(buildUrl)
+                sb.append("${Status.UNSTABLE} [${params.buildnumber}]").append(delimiter).append(params.buildurl)
+                break
         }
         return sb.toString()
     }
