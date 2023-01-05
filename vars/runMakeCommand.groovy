@@ -2,6 +2,7 @@ import org.sklrsn.utils.MakeCommand
 
 def call(Map config) {
     if (config.command?.trim()) {
+        // Execute make command
         def command = MakeCommand.prepare(config.path, config.command)
         sh "${command}"
 
