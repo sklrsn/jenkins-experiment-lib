@@ -24,7 +24,7 @@ abstract class Report {
 
     String report(String delimiter, Map params) {
         StringBuilder sb = new StringBuilder()
-        String buildUrl = params.displayUrl?.trim() ? params.displayUrl : params.buildUrl
+
         switch (params.status) {
             case Status.SUCCESS:
                 sb.append("${Status.SUCCESS}:${params.jobname}-[${params.buildnumber}]").append(delimiter)
@@ -37,13 +37,13 @@ abstract class Report {
                 for (stage in stages) {
                     switch (stage) {
                         case Stage.UNIT_TESTS:
-                            sb.append("Unit - ").append(params.buildUrl).append(Artifacts.UNIT).append(delimiter)
+                            sb.append('Unit - ').append(params.buildUrl).append(Artifacts.UNIT).append(delimiter)
                             break
                         case Stage.SMOKE_TESTS:
-                            sb.append("Smoke - ").append(params.buildUrl).append(Artifacts.SMOKE).append(delimiter)
+                            sb.append('Smoke - ').append(params.buildUrl).append(Artifacts.SMOKE).append(delimiter)
                             break
                         case Stage.BUILD_BINARIES:
-                            sb.append("Failed to compile binaries").append(delimiter)
+                            sb.append('Failed to compile binaries').append(delimiter)
                             break
                     }
                 }
@@ -65,14 +65,16 @@ abstract class Report {
 
         if (params.console?.trim()) {
             sb.append(params.console).append(delimiter)
-            sb.append("more at -").append(params.buildUrl).append("consoleFull").append(delimiter)
+            sb.append('more at -').append(params.buildUrl).append('consoleFull').append(delimiter)
         }
 
         if (params.changes?.trim()) {
-            sb.append("changelog:").append(delimiter)
+            sb.append('changelog:').append(delimiter)
             sb.append(params.changes)
         }
 
+        // If BlueOcean is unavailable, show classic page
+        String buildUrl = params.displayUrl?.trim() ? params.displayUrl : params.buildUrl
         sb.append("Jenkins Pipeline - ${buildUrl}").append(delimiter)
 
         return sb.toString()
