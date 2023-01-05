@@ -1,4 +1,4 @@
-package org.sklrsn.utils
+package org.sklrsn.commands
 
 class MakeCommand {
 
