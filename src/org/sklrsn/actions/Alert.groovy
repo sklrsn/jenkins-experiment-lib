@@ -42,6 +42,12 @@ abstract class Report {
                     switch (stage) {
                         case Stage.UNIT_TESTS:
                             sb.append("${Stage.UNIT_TESTS} - ").append(params.buildUrl).append(Artifacts.UNIT).append(delimiter)
+                            if (params.console && params.console.containsKey(Stage.UNIT_TESTS)) {
+                                sb.append("Console:").append(delimiter)
+                                sb.append(params.console.getMetaClass(Stage.UNIT_TESTS)).append(delimiter)
+                                sb.append(delimiter)
+                                sb.append('more logs at ').append(params.buildUrl).append('consoleFull').append(delimiter)
+                            }
                             break
                         case Stage.SMOKE_TESTS:
                             sb.append("${Stage.SMOKE_TESTS} - ").append(params.buildUrl).append(Artifacts.SMOKE).append(delimiter)
@@ -70,12 +76,6 @@ abstract class Report {
                 break
         }
 
-        if (params.console?.trim()) {
-            sb.append("Console:").append(delimiter)
-            sb.append(params.console).append(delimiter)
-            sb.append(delimiter)
-            sb.append('more logs at ').append(params.buildUrl).append('consoleFull').append(delimiter)
-        }
 
         if (params.changes?.trim()) {
             sb.append(delimiter)
