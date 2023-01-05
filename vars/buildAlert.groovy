@@ -40,8 +40,8 @@ def call(Map config) {
                          ]]
                 println(message)
                 println(config.slackChannels)
-                if (config.slackChannels) {
-                    for (channel in slackChannels) {
+                if (config.containsKey("slackChannels")) {
+                    for (channel in config.slackChannels) {
                         slackSend(channel: channel, attachments: attachments)
                     }
                 }
