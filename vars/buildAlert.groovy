@@ -40,6 +40,7 @@ def call(Map config) {
             default:
                 println(message)
         }
+        return
     }
     throw new RuntimeException('Incorrect usage of buildAlert')
 }
