@@ -7,9 +7,7 @@ def call(Map config) {
     if (config.medium?.trim() && config.jobname?.trim() && config.status?.trim() && config.buildnumber?.trim() && config.buildUrl?.trim()) {
         def message = Alert.generate(config)
 
-        String channel = config.channel?.trim() ? config.channel.trim() : '#build'
         String color = Color.INFO
-
         if (config.color?.trim()) {
             color = config.color
         } else {
@@ -37,7 +35,11 @@ def call(Map config) {
                 def attachments = [[text    : message,
                                     fallback: 'Something went wrong. Please check the pipeline -> ${config.buildurl}',
                                     color   : color]]
-                slackSend(channel: channel, attachments: attachments)
+                if (config.slackChannels) {
+                    for (channel in slackChannels) {
+                        slackSend(channel: channel, attachments: attachments)
+                    }
+                }
             case Medium.GITLAB:
                 addGitLabMRComment comment: message
             case Medium.CONSOLE:
