@@ -46,7 +46,7 @@ abstract class Report {
                             println(sb)
                             println(Stage.UNIT_TESTS)
                             print(delimiter)
-                            this.appendConsoleLogs(params, sb, Stage.UNIT_TESTS, delimiter)
+                            //this.appendConsoleLogs(params, sb, Stage.UNIT_TESTS, delimiter)
                             break
                         case Stage.SMOKE_TESTS:
                             sb.append("${Stage.SMOKE_TESTS} - ").append(params.buildUrl).append(Artifacts.SMOKE).append(delimiter)
