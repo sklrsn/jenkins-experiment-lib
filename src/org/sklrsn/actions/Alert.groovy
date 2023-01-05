@@ -89,7 +89,7 @@ abstract class Report {
     }
 
     private appendConsoleLogs(Map params, StringBuilder sb, String stage, String delimiter) {
-        if (params.console && params.console.containsKey(stage)) {
+        if (params.containsKey("console") && params.console.containsKey(stage)) {
             sb.append("Console:").append(delimiter)
             sb.append(params.console.get(stage).append(delimiter))
             sb.append('more logs at ').append(params.buildUrl).append('consoleFull').append(delimiter)
