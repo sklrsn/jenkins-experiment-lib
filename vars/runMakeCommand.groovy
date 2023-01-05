@@ -1,6 +1,7 @@
 import org.sklrsn.utils.MakeCommand
 
 def call(Map config) {
+    print(config.command)
     if (config.command?.trim()) {
         throw new RuntimeException('Incorrect usage of runMakeCommand. Please check the inputs')
     }
