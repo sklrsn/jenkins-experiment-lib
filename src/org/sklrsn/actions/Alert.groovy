@@ -12,6 +12,8 @@ class Alert {
                 return new Slack().generate(params)
             case Medium.GITLAB:
                 return new Gitlab().generate(params)
+            case Medium.CONSOLE:
+                return new Console().generate(params)
         }
         return ''
     }
@@ -59,11 +61,22 @@ class Slack extends Report {
 
 }
 
+
 class Gitlab extends Report {
 
     @Override
     String generate(Map params) {
         return this.report(Delimiter.BR, params)
+    }
+
+}
+
+
+class Console extends Report {
+
+    @Override
+    String generate(Map params) {
+        return this.report(Delimiter.PIPE, params)
     }
 
 }

@@ -37,8 +37,10 @@ def call(Map config) {
                 slackSend(color: color, channel: channel, message: message)
             case Medium.GITLAB:
                 addGitLabMRComment comment: message
-            default:
+            case Medium.CONSOLE:
                 println(message)
+            default:
+                throw new RuntimeException('Incorrect usage of buildAlert')
         }
         return
     }
