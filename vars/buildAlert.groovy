@@ -7,7 +7,7 @@ def call(Map config) {
     if (config.medium?.trim() && config.status?.trim() && config.buildNumber?.trim() && config.buildUrl?.trim()) {
         def message = Alert.generate(config)
 
-        String channel = config.channel?.trim() ? config.channel.trim() : "#build"
+        String channel = config.channel?.trim() ? config.channel.trim() : '#build'
         String color = Color.INFO
 
         if (config.color?.trim()) {
@@ -38,10 +38,8 @@ def call(Map config) {
             case Medium.GITLAB:
                 addGitLabMRComment comment: message
             default:
-                throw new RuntimeException('Incorrect usage of buildAlert')
+                println(message)
         }
-
-
     }
     throw new RuntimeException('Incorrect usage of buildAlert')
 }
