@@ -4,7 +4,7 @@ import org.sklrsn.models.Medium
 import org.sklrsn.models.Status
 
 def call(Map config) {
-    if (config.medium?.trim() && config.status?.trim() && config.buildnumber?.trim() && config.buildurl?.trim()) {
+    if (config.medium?.trim() && config.jobname?.trim() && config.status?.trim() && config.buildnumber?.trim() && config.buildurl?.trim()) {
         def message = Alert.generate(config)
 
         String channel = config.channel?.trim() ? config.channel.trim() : '#build'
