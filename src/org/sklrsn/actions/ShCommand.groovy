@@ -1,4 +1,4 @@
-package org.sklrsn.commands
+package org.sklrsn.actions
 
 class ShCommand {
 

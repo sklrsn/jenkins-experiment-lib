@@ -1,4 +1,4 @@
-import org.sklrsn.commands.MakeCommand
+import org.sklrsn.actions.MakeCommand
 
 def call(Map config) {
     if (config.command?.trim()) {
