@@ -34,13 +34,9 @@ def call(Map config) {
 
         switch (config.medium) {
             case Medium.SLACK:
-                def attachments = [
-                        [
-                                text    : message,
-                                fallback: '',
-                                color   : color
-                        ]
-                ]
+                def attachments = [[text    : message,
+                                    fallback: 'Something went wrong. Please check the pipeline -> ${config.buildurl}',
+                                    color   : color]]
                 slackSend(channel: channel, attachments: attachments)
                 //slackSend(color: color, channel: channel, message: message)
             case Medium.GITLAB:
