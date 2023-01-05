@@ -38,7 +38,6 @@ def call(Map config) {
                                     fallback: 'Something went wrong. Please check the pipeline -> ${config.buildurl}',
                                     color   : color]]
                 slackSend(channel: channel, attachments: attachments)
-                //slackSend(color: color, channel: channel, message: message)
             case Medium.GITLAB:
                 addGitLabMRComment comment: message
             case Medium.CONSOLE:
