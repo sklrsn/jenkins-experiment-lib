@@ -76,7 +76,7 @@ class Console extends Report {
 
     @Override
     String generate(Map params) {
-        return this.report(Delimiter.PIPE, params)
+        return this.report(Delimiter.EOL, params)
     }
 
 }
