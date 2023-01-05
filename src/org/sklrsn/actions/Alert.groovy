@@ -42,7 +42,7 @@ abstract class Report {
                     switch (stage) {
                         case Stage.UNIT_TESTS:
                             sb.append("${Stage.UNIT_TESTS} - ").append(params.buildUrl).append(Artifacts.UNIT).append(delimiter)
-                            //this.appendConsoleLogs(params, sb, Stage.UNIT_TESTS, delimiter)
+                            appendConsoleLogs(params, sb, Stage.UNIT_TESTS, delimiter)
                             break
                         case Stage.SMOKE_TESTS:
                             sb.append("${Stage.SMOKE_TESTS} - ").append(params.buildUrl).append(Artifacts.SMOKE).append(delimiter)
