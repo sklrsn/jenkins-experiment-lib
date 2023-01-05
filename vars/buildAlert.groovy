@@ -35,7 +35,7 @@ def call(Map config) {
                 def attachments = [[text    : message,
                                     fallback: 'Something went wrong. Please check the pipeline -> ${config.buildurl}',
                                     color   : color]]
-                if (config.slackChannels) {
+                if (config.containsKey("slackChannels")) {
                     for (channel in slackChannels) {
                         slackSend(channel: channel, attachments: attachments)
                     }
