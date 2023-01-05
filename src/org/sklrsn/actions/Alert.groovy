@@ -64,7 +64,7 @@ abstract class Report {
         }
 
         if (params.console?.trim()) {
-            sb.append(params.console).append(delimiter)
+            sb.append(params.console).append(delimiter).append(delimiter)
             sb.append('more at -').append(params.buildUrl).append('consoleFull').append(delimiter)
         }
 
