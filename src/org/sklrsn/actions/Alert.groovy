@@ -28,23 +28,23 @@ abstract class Report {
         StringBuilder sb = new StringBuilder()
         switch (params.status) {
             case Status.SUCCESS:
-                sb.append("${Status.SUCCESS} [${params.buildnumber}]").append(delimiter).append(params.buildurl)
+                sb.append("${Status.SUCCESS}[${params.buildnumber}]").append(delimiter).append(params.buildurl)
                 break
 
             case Status.FAILURE:
-                sb.append("${Status.FAILURE} [${params.buildnumber}]").append(delimiter).append(params.buildurl)
+                sb.append("${Status.FAILURE}[${params.buildnumber}]").append(delimiter).append(params.buildurl)
                 break
 
             case Status.ABORTED:
-                sb.append("${Status.ABORTED} [${params.buildnumber}]").append(delimiter).append(params.buildurl)
+                sb.append("${Status.ABORTED}[${params.buildnumber}]").append(delimiter).append(params.buildurl)
                 break
 
             case Status.NORMAL:
-                sb.append("${Status.NORMAL} [${params.buildnumber}]").append(delimiter).append(params.buildurl)
+                sb.append("${Status.NORMAL}[${params.buildnumber}]").append(delimiter).append(params.buildurl)
                 break
 
             case Status.UNSTABLE:
-                sb.append("${Status.UNSTABLE} [${params.buildnumber}]").append(delimiter).append(params.buildurl)
+                sb.append("${Status.UNSTABLE}[${params.buildnumber}]").append(delimiter).append(params.buildurl)
                 break
         }
         return sb.toString()
@@ -61,7 +61,6 @@ class Slack extends Report {
 
 }
 
-
 class Gitlab extends Report {
 
     @Override
@@ -70,7 +69,6 @@ class Gitlab extends Report {
     }
 
 }
-
 
 class Console extends Report {
 
