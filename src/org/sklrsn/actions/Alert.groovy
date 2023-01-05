@@ -75,7 +75,7 @@ abstract class Report {
 
         // If BlueOcean is unavailable, show classic page
         String buildUrl = params.displayUrl?.trim() ? params.displayUrl : params.buildUrl
-        sb.append("Jenkins Pipeline - ${buildUrl}").append(delimiter)
+        sb.append("Pipeline - ${buildUrl}").append(delimiter)
 
         return sb.toString()
     }
