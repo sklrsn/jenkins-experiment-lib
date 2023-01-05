@@ -41,13 +41,13 @@ abstract class Report {
                 for (stage in stages) {
                     switch (stage) {
                         case Stage.UNIT_TESTS:
-                            sb.append('${Stage.UNIT_TESTS} - ').append(params.buildUrl).append(Artifacts.UNIT).append(delimiter)
+                            sb.append("${Stage.UNIT_TESTS} - ").append(params.buildUrl).append(Artifacts.UNIT).append(delimiter)
                             break
                         case Stage.SMOKE_TESTS:
-                            sb.append('${Stage.SMOKE_TESTS} - ').append(params.buildUrl).append(Artifacts.SMOKE).append(delimiter)
+                            sb.append("${Stage.SMOKE_TESTS} - ").append(params.buildUrl).append(Artifacts.SMOKE).append(delimiter)
                             break
                         case Stage.BUILD_BINARIES:
-                            sb.append('${Stage.BUILD_BINARIES} - Failed to compile binaries').append(delimiter)
+                            sb.append("${Stage.BUILD_BINARIES} - Failed to compile binaries").append(delimiter)
                             break
                     }
                 }
