@@ -1,8 +1,6 @@
 package org.sklrsn.actions
 
-import org.sklrsn.models.Delimiter
-import org.sklrsn.models.Medium
-import org.sklrsn.models.Status
+import org.sklrsn.models.*
 
 class Alert {
 
@@ -26,32 +24,57 @@ abstract class Report {
 
     String report(String delimiter, Map params) {
         StringBuilder sb = new StringBuilder()
+        String buildUrl = params.displayUrl?.trim() ? params.displayUrl : params.buildUrl
         switch (params.status) {
             case Status.SUCCESS:
                 sb.append("${Status.SUCCESS}:${params.jobname}-[${params.buildnumber}]").append(delimiter)
-                sb.append("${params.buildurl}").append(delimiter)
                 break
 
             case Status.FAILURE:
                 sb.append("${Status.FAILURE}:${params.jobname}-[${params.buildnumber}]").append(delimiter)
-                sb.append("${params.buildurl}").append(delimiter)
+
+                Set<String> stages = params.stages
+                for (stage in stages) {
+                    switch (stage) {
+                        case Stage.UNIT_TESTS:
+                            sb.append("Unit - ").append(buildUrl).append(Artifacts.UNIT).append(delimiter)
+                            break
+                        case Stage.SMOKE_TESTS:
+                            sb.append("Smoke - ").append(buildUrl).append(Artifacts.SMOKE).append(delimiter)
+                            break
+                        case Stage.BUILD_BINARIES:
+                            sb.append("Failed to compile binaries").append(delimiter)
+                            break
+                    }
+                }
+
                 break
 
             case Status.ABORTED:
                 sb.append("${Status.ABORTED}:${params.jobname}-[${params.buildnumber}]").append(delimiter)
-                sb.append("${params.buildurl}").append(delimiter)
                 break
 
             case Status.NORMAL:
                 sb.append("${Status.NORMAL}:${params.jobname}-[${params.buildnumber}]").append(delimiter)
-                sb.append("${params.buildurl}").append(delimiter)
                 break
 
             case Status.UNSTABLE:
                 sb.append("${Status.UNSTABLE}:${params.jobname}-[${params.buildnumber}]").append(delimiter)
-                sb.append("${params.buildurl}").append(delimiter)
                 break
         }
+
+        if (params.console?.trim()) {
+            sb.append(params.console).append(delimiter)
+            sb.append(buildUrl).append("consoleFull")
+        }
+
+        if (params.changes?.trim()) {
+            sb.append("changelog:").append(delimiter)
+            sb.append(params.changes)
+        }
+
+        sb.append("Jenkins Pipeline - ${buildUrl}").append(delimiter)
+
         return sb.toString()
     }
 
