@@ -42,27 +42,20 @@ abstract class Report {
                     switch (stage) {
                         case Stage.UNIT_TESTS:
                             sb.append("${Stage.UNIT_TESTS} - ").append(params.buildUrl).append(Artifacts.UNIT).append(delimiter)
-                            if (params.console && params.console.containsKey(Stage.UNIT_TESTS)) {
-                                sb.append("Console:").append(delimiter)
-                                sb.append(params.console.get(Stage.UNIT_TESTS)).append(delimiter)
-                                sb.append('more logs at ').append(params.buildUrl).append('consoleFull').append(delimiter)
-                            }
+                            this.appendConsoleLogs(params, sb, Stage.UNIT_TESTS, delimiter)
                             break
                         case Stage.SMOKE_TESTS:
                             sb.append("${Stage.SMOKE_TESTS} - ").append(params.buildUrl).append(Artifacts.SMOKE).append(delimiter)
-                            if (params.console && params.console.containsKey(Stage.SMOKE_TESTS)) {
-                                sb.append("Console:").append(delimiter)
-                                sb.append(params.console.get(Stage.UNIT_TESTS)).append(delimiter)
-                                sb.append('more logs at ').append(params.buildUrl).append('consoleFull').append(delimiter)
-                            }
+                            this.appendConsoleLogs(params, sb, Stage.SMOKE_TESTS, delimiter)
                             break
                         case Stage.BUILD_BINARIES:
                             sb.append("${Stage.BUILD_BINARIES} - Failed to compile binaries").append(delimiter)
-                            if (params.console && params.console.containsKey(Stage.UNIT_TESTS)) {
-                                sb.append("Console:").append(delimiter)
-                                sb.append(params.console.get(Stage.UNIT_TESTS)).append(delimiter)
-                                sb.append('more logs at ').append(params.buildUrl).append('consoleFull').append(delimiter)
-                            }
+                            this.appendConsoleLogs(params, sb, Stage.BUILD_BINARIES, delimiter)
+                            /* if (params.console && params.console.containsKey(Stage.UNIT_TESTS)) {
+                                 sb.append("Console:").append(delimiter)
+                                 sb.append(params.console.get(Stage.UNIT_TESTS)).append(delimiter)
+                                 sb.append('more logs at ').append(params.buildUrl).append('consoleFull').append(delimiter)
+                             }*/
                             break
                     }
                 }
@@ -93,6 +86,14 @@ abstract class Report {
         }
 
         return sb.toString()
+    }
+
+    private appendConsoleLogs(Map params, StringBuilder sb, String stage, String delimiter) {
+        if (params.console && params.console.containsKey(stage)) {
+            sb.append("Console:").append(delimiter)
+            sb.append(params.console.get(stage).append(delimiter))
+            sb.append('more logs at ').append(params.buildUrl).append('consoleFull').append(delimiter)
+        }
     }
 
 }
