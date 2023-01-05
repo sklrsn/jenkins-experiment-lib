@@ -37,10 +37,10 @@ abstract class Report {
                 for (stage in stages) {
                     switch (stage) {
                         case Stage.UNIT_TESTS:
-                            sb.append("Unit - ").append(buildUrl).append(Artifacts.UNIT).append(delimiter)
+                            sb.append("Unit - ").append(params.buildUrl).append(Artifacts.UNIT).append(delimiter)
                             break
                         case Stage.SMOKE_TESTS:
-                            sb.append("Smoke - ").append(buildUrl).append(Artifacts.SMOKE).append(delimiter)
+                            sb.append("Smoke - ").append(params.buildUrl).append(Artifacts.SMOKE).append(delimiter)
                             break
                         case Stage.BUILD_BINARIES:
                             sb.append("Failed to compile binaries").append(delimiter)
@@ -65,7 +65,7 @@ abstract class Report {
 
         if (params.console?.trim()) {
             sb.append(params.console).append(delimiter)
-            sb.append(buildUrl).append("consoleFull")
+            sb.append(params.buildUrl).append("consoleFull")
         }
 
         if (params.changes?.trim()) {
