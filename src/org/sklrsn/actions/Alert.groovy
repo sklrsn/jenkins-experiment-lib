@@ -50,7 +50,7 @@ abstract class Report {
                             break
                         case Stage.SMOKE_TESTS:
                             sb.append("${Stage.SMOKE_TESTS} - ").append(params.buildUrl).append(Artifacts.SMOKE).append(delimiter)
-                            if (params.console && params.console.containsKey(Stage.UNIT_TESTS)) {
+                            if (params.console && params.console.containsKey(Stage.SMOKE_TESTS)) {
                                 sb.append("Console:").append(delimiter)
                                 sb.append(params.console.get(Stage.UNIT_TESTS)).append(delimiter)
                                 sb.append('more logs at ').append(params.buildUrl).append('consoleFull').append(delimiter)
