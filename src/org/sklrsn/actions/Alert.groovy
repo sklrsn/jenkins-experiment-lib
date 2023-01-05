@@ -72,11 +72,13 @@ abstract class Report {
 
         if (params.console?.trim()) {
             sb.append("Console:").append(delimiter)
-            sb.append(params.console).append(delimiter).append(delimiter)
+            sb.append(params.console).append(delimiter)
+            sb.append(delimiter)
             sb.append('more logs at ').append(params.buildUrl).append('consoleFull').append(delimiter)
         }
 
         if (params.changes?.trim()) {
+            sb.append(delimiter)
             sb.append('changelog:').append(delimiter)
             sb.append(params.changes)
         }
