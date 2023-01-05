@@ -34,7 +34,15 @@ def call(Map config) {
 
         switch (config.medium) {
             case Medium.SLACK:
-                slackSend(color: color, channel: channel, message: message)
+                def attachments = [
+                        [
+                                text    : message,
+                                fallback: '',
+                                color   : color
+                        ]
+                ]
+                slackSend(channel: channel, attachments: attachments)
+                //slackSend(color: color, channel: channel, message: message)
             case Medium.GITLAB:
                 addGitLabMRComment comment: message
             case Medium.CONSOLE:
