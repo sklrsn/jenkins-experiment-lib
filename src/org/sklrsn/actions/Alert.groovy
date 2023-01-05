@@ -6,8 +6,8 @@ import org.sklrsn.models.Status
 
 class Alert {
 
-    static String generate(String app, Map params) {
-        switch (app) {
+    static String generate(Map params) {
+        switch (params.medium) {
             case Medium.SLACK:
                 return new Slack().generate(params)
             case Medium.GITLAB:
