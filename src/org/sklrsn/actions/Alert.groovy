@@ -46,19 +46,8 @@ abstract class Report {
                 for (stage in stages) {
                     switch (stage) {
                         case Stage.UNIT_TESTS:
-                            println("***********************")
-                            print(params.console)
-                            print(sb)
-                            print(Stage.UNIT_TESTS)
-                            print(delimiter)
-                            println("***********************")
-                           /* sb.append("${Stage.UNIT_TESTS} - ").append(params.buildUrl).append(Artifacts.UNIT).append(delimiter)
-                            if (params.console && params.console.containsKey(Stage.UNIT_TESTS)) {
-                                sb.append("Console:").append(delimiter)
-                                sb.append(params.console.get(Stage.UNIT_TESTS)).append(delimiter)
-                                sb.append('more logs at ').append(params.buildUrl).append('consoleFull').append(delimiter)
-                            }*/
-                            //appendConsoleLogs(params.console, sb, Stage.UNIT_TESTS, delimiter)
+                            sb.append("${Stage.UNIT_TESTS} - ").append(params.buildUrl).append(Artifacts.UNIT).append(delimiter)
+                            appendConsoleLogs(params, sb, delimiter)
                             break
                         case Stage.SMOKE_TESTS:
                             sb.append("${Stage.SMOKE_TESTS} - ").append(params.buildUrl).append(Artifacts.SMOKE).append(delimiter)
@@ -107,9 +96,10 @@ abstract class Report {
         return sb.toString()
     }
 
-    private appendConsoleLogs(Map params, StringBuilder sb, String stage, String delimiter) {
-        if (params.containsKey("console") && params.console.containsKey(stage)) {
-            sb.append("Console:").append(delimiter).append(params.console.get(stage)).append(delimiter)
+    private void appendConsoleLogs(Map params, StringBuilder sb, String delimiter) {
+        if (params.console && params.console.containsKey(Stage.UNIT_TESTS)) {
+            sb.append("Console:").append(delimiter)
+            sb.append(params.console.get(Stage.UNIT_TESTS)).append(delimiter)
             sb.append('more logs at ').append(params.buildUrl).append('consoleFull').append(delimiter)
         }
     }
