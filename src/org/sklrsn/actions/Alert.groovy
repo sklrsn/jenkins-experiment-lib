@@ -47,10 +47,10 @@ abstract class Report {
                     switch (stage) {
                         case Stage.UNIT_TESTS:
                             println("***********************")
-                            println(params.console)
-                            println(sb)
-                            println(Stage.UNIT_TESTS)
-                            println(delimiter)
+                            print(params.console)
+                            print(sb)
+                            print(Stage.UNIT_TESTS)
+                            print(delimiter)
                             println("***********************")
                            /* sb.append("${Stage.UNIT_TESTS} - ").append(params.buildUrl).append(Artifacts.UNIT).append(delimiter)
                             if (params.console && params.console.containsKey(Stage.UNIT_TESTS)) {
