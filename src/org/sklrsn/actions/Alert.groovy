@@ -46,18 +46,21 @@ abstract class Report {
                 for (stage in stages) {
                     switch (stage) {
                         case Stage.UNIT_TESTS:
-                            sb.append("${Stage.UNIT_TESTS} - ").append(params.buildUrl).append(Artifacts.UNIT).append(delimiter)
-                            if (params.console && params.console.containsKey(Stage.UNIT_TESTS)) {
-                                sb.append("Console:").append(delimiter)
-                                sb.append(params.console.get(Stage.UNIT_TESTS)).append(delimiter)
-                                sb.append('more logs at ').append(params.buildUrl).append('consoleFull').append(delimiter)
-                            }
+
                             println("***********************")
                             println(params.console)
                             println(sb)
                             println(Stage.UNIT_TESTS)
                             println(delimiter)
                             println("***********************")
+                            
+                            sb.append("${Stage.UNIT_TESTS} - ").append(params.buildUrl).append(Artifacts.UNIT).append(delimiter)
+                            if (params.console && params.console.containsKey(Stage.UNIT_TESTS)) {
+                                sb.append("Console:").append(delimiter)
+                                sb.append(params.console.get(Stage.UNIT_TESTS)).append(delimiter)
+                                sb.append('more logs at ').append(params.buildUrl).append('consoleFull').append(delimiter)
+                            }
+
 
                             //appendConsoleLogs(params.console, sb, Stage.UNIT_TESTS, delimiter)
                             break
