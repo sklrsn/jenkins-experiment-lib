@@ -26,6 +26,14 @@ class Alert {
 abstract class Report {
     abstract String generate(Map params)
 
+    void appendConsoleLogs(Map params, StringBuilder sb, String delimiter) {
+        if (params.console && params.console.containsKey(Stage.UNIT_TESTS)) {
+            sb.append("Console:").append(delimiter)
+            sb.append(params.console.get(Stage.UNIT_TESTS)).append(delimiter)
+            sb.append('more logs at ').append(params.buildUrl).append('consoleFull').append(delimiter)
+        }
+    }
+
     String report(String delimiter, Map params) {
         StringBuilder sb = new StringBuilder()
         // If BlueOcean is unavailable, fallback to classic page
@@ -101,13 +109,6 @@ abstract class Report {
     }
 
 
-    void appendConsoleLogs(Map params, StringBuilder sb, String delimiter) {
-        if (params.console && params.console.containsKey(Stage.UNIT_TESTS)) {
-            sb.append("Console:").append(delimiter)
-            sb.append(params.console.get(Stage.UNIT_TESTS)).append(delimiter)
-            sb.append('more logs at ').append(params.buildUrl).append('consoleFull').append(delimiter)
-        }
-    }
 }
 
 class Slack extends Report {
