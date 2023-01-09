@@ -47,6 +47,7 @@ abstract class Report {
                     switch (stage) {
                         case Stage.UNIT_TESTS:
                             sb.append("${Stage.UNIT_TESTS} - ").append(params.buildUrl).append(Artifacts.UNIT).append(delimiter)
+                            dummy(params.console)
                             if (params.console && params.console.containsKey(Stage.UNIT_TESTS)) {
                                 sb.append("Console:").append(delimiter)
                                 sb.append(params.console.get(Stage.UNIT_TESTS)).append(delimiter)
@@ -98,6 +99,10 @@ abstract class Report {
         }
 
         return sb.toString()
+    }
+
+    private void dummy(Map params) {
+        println(params)
     }
 
     private void appendConsoleLogs(Map params, StringBuilder sb, String delimiter) {
