@@ -26,14 +26,6 @@ class Alert {
 abstract class Report {
     abstract String generate(Map params)
 
-    void appendConsoleLogs(Map params, StringBuilder sb, String delimiter) {
-        if (params.console && params.console.containsKey(Stage.UNIT_TESTS)) {
-            sb.append("Console:").append(delimiter)
-            sb.append(params.console.get(Stage.UNIT_TESTS)).append(delimiter)
-            sb.append('more logs at ').append(params.buildUrl).append('consoleFull').append(delimiter)
-        }
-    }
-
     String report(String delimiter, Map params) {
         StringBuilder sb = new StringBuilder()
         // If BlueOcean is unavailable, fallback to classic page
@@ -54,12 +46,7 @@ abstract class Report {
                     switch (stage) {
                         case Stage.UNIT_TESTS:
                             sb.append("${Stage.UNIT_TESTS} - ").append(params.buildUrl).append(Artifacts.UNIT).append(delimiter)
-                            dummy()
-                            if (params.console && params.console.containsKey(Stage.UNIT_TESTS)) {
-                                sb.append("Console:").append(delimiter)
-                                sb.append(params.console.get(Stage.UNIT_TESTS)).append(delimiter)
-                                sb.append('more logs at ').append(params.buildUrl).append('consoleFull').append(delimiter)
-                            }
+                            appendConsoleErrs(params, sb, delimiter)
                             break
                         case Stage.SMOKE_TESTS:
                             sb.append("${Stage.SMOKE_TESTS} - ").append(params.buildUrl).append(Artifacts.SMOKE).append(delimiter)
@@ -106,6 +93,14 @@ abstract class Report {
         }
 
         return sb.toString()
+    }
+
+    void appendConsoleErrs(Map params, StringBuilder sb, String delimiter) {
+        if (params.console && params.console.containsKey(Stage.UNIT_TESTS)) {
+            sb.append("Console:").append(delimiter)
+            sb.append(params.console.get(Stage.UNIT_TESTS)).append(delimiter)
+            sb.append('more logs at ').append(params.buildUrl).append('consoleFull').append(delimiter)
+        }
     }
 
     void dummy() {}
