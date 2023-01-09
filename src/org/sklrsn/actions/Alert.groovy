@@ -76,7 +76,6 @@ abstract class Report {
                 break
         }
 
-
         if (params.changes?.trim()) {
             sb.append(delimiter)
             sb.append('changelog:').append(delimiter)
