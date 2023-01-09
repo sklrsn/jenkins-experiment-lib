@@ -34,8 +34,6 @@ abstract class Report {
         }
     }
 
-    void dummy() {}
-
     String report(String delimiter, Map params) {
         StringBuilder sb = new StringBuilder()
         // If BlueOcean is unavailable, fallback to classic page
@@ -109,6 +107,8 @@ abstract class Report {
 
         return sb.toString()
     }
+
+    void dummy() {}
 }
 
 class Slack extends Report {
