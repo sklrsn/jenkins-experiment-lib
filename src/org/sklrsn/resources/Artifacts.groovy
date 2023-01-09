@@ -1,4 +1,4 @@
-package org.sklrsn.models
+package org.sklrsn.resources
 
 class Artifacts {
     public static final String UNIT = "artifact/unit.html"
