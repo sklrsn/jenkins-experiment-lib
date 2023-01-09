@@ -101,7 +101,7 @@ abstract class Report {
         return sb.toString()
     }
 
-    private void dummy(Map params) {
+    private void dummy(Object params) {
         println(params)
     }
 
