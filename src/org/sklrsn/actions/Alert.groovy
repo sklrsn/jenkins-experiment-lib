@@ -41,7 +41,6 @@ abstract class Report {
                 sb.append("Pipeline - ${buildUrl}").append(delimiter)
 
                 Set<String> stages = params.stages
-                println(stages)
                 for (stage in stages) {
                     switch (stage) {
                         case Stage.UNIT_TESTS:
