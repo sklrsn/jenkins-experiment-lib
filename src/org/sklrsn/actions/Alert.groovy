@@ -42,11 +42,12 @@ abstract class Report {
                     switch (stage) {
                         case Stage.UNIT_TESTS:
                             sb.append("${Stage.UNIT_TESTS} - ").append(params.buildUrl).append(Artifacts.UNIT).append(delimiter)
-                            if (params.console && params.console.containsKey(Stage.UNIT_TESTS)) {
-                                sb.append("Console:").append(delimiter)
-                                sb.append(params.console.get(Stage.UNIT_TESTS)).append(delimiter)
-                                sb.append('more logs at ').append(params.buildUrl).append('consoleFull').append(delimiter)
-                            }
+                            /*  if (params.console && params.console.containsKey(Stage.UNIT_TESTS)) {
+                                  sb.append("Console:").append(delimiter)
+                                  sb.append(params.console.get(Stage.UNIT_TESTS)).append(delimiter)
+                                  sb.append('more logs at ').append(params.buildUrl).append('consoleFull').append(delimiter)
+                              }*/
+                            appendConsoleLogs(params.console, sb, Stage.UNIT_TESTS, delimiter)
                             break
                         case Stage.SMOKE_TESTS:
                             sb.append("${Stage.SMOKE_TESTS} - ").append(params.buildUrl).append(Artifacts.SMOKE).append(delimiter)
@@ -95,7 +96,7 @@ abstract class Report {
         return sb.toString()
     }
 
-    private appendConsoleLogs(Map params, StringBuilder sb, String stage, String delimiter) {
+    private appendConsoleLogs(params, sb, stage, delimiter) {
         if (params.containsKey("console") && params.console.containsKey(stage)) {
             sb.append("Console:").append(delimiter)
             sb.append(params.console.get(stage).append(delimiter))
