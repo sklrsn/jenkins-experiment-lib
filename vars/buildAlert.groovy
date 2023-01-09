@@ -7,7 +7,9 @@ def call(Map config) {
     if (config.medium?.trim() && config.jobname?.trim() && config.status?.trim() && config.buildnumber?.trim() && config.buildUrl?.trim()) {
         def message = Alert.generate(config)
 
+        println("******************************")
         println(config.console)
+        println("******************************")
         String color = Color.INFO
         if (config.color?.trim()) {
             color = config.color
