@@ -41,6 +41,7 @@ def call(Map config) {
                                  fallback: 'Please check the pipeline -> ${config.buildurl}',
                                  color   : color
                          ]]
+                println("**********Slack Message *********")
                 println(message)
                 if (config.containsKey("slackChannels")) {
                     for (channel in config.slackChannels) {
