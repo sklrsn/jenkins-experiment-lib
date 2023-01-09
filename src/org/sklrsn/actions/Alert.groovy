@@ -47,6 +47,13 @@ abstract class Report {
                                   sb.append(params.console.get(Stage.UNIT_TESTS)).append(delimiter)
                                   sb.append('more logs at ').append(params.buildUrl).append('consoleFull').append(delimiter)
                               }*/
+                            println("***********************")
+                            println(params.console)
+                            println(sb)
+                            println(Stage.UNIT_TESTS)
+                            println(delimiter)
+                            println("***********************")
+
                             appendConsoleLogs(params.console, sb, Stage.UNIT_TESTS, delimiter)
                             break
                         case Stage.SMOKE_TESTS:
@@ -96,14 +103,12 @@ abstract class Report {
         return sb.toString()
     }
 
-    private appendConsoleLogs(params, sb, stage, delimiter) {
+    private appendConsoleLogs(Map params, StringBuilder sb, String stage, String delimiter) {
         if (params.containsKey("console") && params.console.containsKey(stage)) {
-            sb.append("Console:").append(delimiter)
-            sb.append(params.console.get(stage).append(delimiter))
+            sb.append("Console:").append(delimiter).append(params.console.get(stage)).append(delimiter)
             sb.append('more logs at ').append(params.buildUrl).append('consoleFull').append(delimiter)
         }
     }
-
 }
 
 class Slack extends Report {
